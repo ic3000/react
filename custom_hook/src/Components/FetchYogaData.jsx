@@ -13,7 +13,7 @@ const FetchYogaData = () => {
                     <>
                         <li className='list_data'>
                             <h3>{e.name}</h3>
-                            <p><strong>Benefits: </strong>{e.benefits6}</p>
+                            <p><strong>Benefits: </strong>{e.benefits}</p>
                             <p><strong>Time duration: </strong>{e.time_duration}</p>
                         </li>
                     </>
