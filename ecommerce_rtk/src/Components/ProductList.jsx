@@ -14,7 +14,16 @@ const ProductList = () => {
       <h2 className="product-list-title">Products</h2>
       <ul className="product-list-items">
      
-      </ul>
+          </ul>
+          {products.map(product => (
+              <li key={product.id} className="product-list-item">
+                  <span>{product.name} - ${product.price}</span>
+                  <button>
+                      Add to Cart
+                  </button>
+              </li>
+          ))}
+
     </div>
   );
 };
