@@ -1,11 +1,15 @@
-﻿import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { addItem } from './CartSlice'; // Adjust path if needed
+﻿import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addItem } from './CartSlice';
 import './ProductList.css';
 import CartItem from './CartItem';
 
 function ProductList() {
     const dispatch = useDispatch();
+    const cartQuantity = useSelector(state =>
+        state.cart.items.reduce((total, item) => total + item.quantity, 0)
+    );
+   // console.log("Cart quantity:", cartQuantity);
     const [showCart, setShowCart] = useState(false);
     const [showPlants, setShowPlants] = useState(false);
     const [addedToCart, setAddedToCart] = useState({});
@@ -33,7 +37,7 @@ function ProductList() {
         setShowCart(false);
     };
 
-    const plantsArray = [
+        const plantsArray = [
         {
             category: "Air Purifying Plants",
             plants: [
@@ -253,8 +257,10 @@ function ProductList() {
                 fontSize: '20px',
             }}>
                 <div className="luxury">
-                    <img src="https://cdn.pixabay.com/photo/2020/08/05/13/12/eco-5465432_1280.png" alt="" />
-                    <a href="/" style={{ textDecoration: 'none' }}>
+                    <img src="https://cdn.pixabay.com/photo/2020/08/05/13/12/eco-5465432_1280.png"
+                        style={{ height: '40px', width: '40px', marginRight: '10px' }}
+                        alt="" />
+                        <a href="/" style={{ textDecoration: 'none' }}>
                         <h3 style={{ color: 'white' }}>Paradise Nursery</h3>
                         <i style={{ color: 'white' }}>Where Green Meets Serenity</i>
                     </a>
@@ -267,9 +273,14 @@ function ProductList() {
                 }}>
                     <a href="#" onClick={handlePlantsClick} style={{ color: 'white', fontSize: '30px', textDecoration: 'none' }}>Plants</a>
                     <a href="#" onClick={handleCartClick} style={{ color: 'white', fontSize: '30px', textDecoration: 'none' }}>
-                        <h1 className='cart'>
-                            🛒
-                        </h1>
+                        <div style={{ position: 'relative', display: 'inline-block' }}>
+                            <span style={{ fontSize: '24px' }}>🛒</span>
+                            {cartQuantity > 0 && (
+                                <span className="cart-badge" key={cartQuantity}>
+                                    {cartQuantity}
+                                </span>
+                            )}
+                        </div>
                     </a>
                 </div>
             </div>
